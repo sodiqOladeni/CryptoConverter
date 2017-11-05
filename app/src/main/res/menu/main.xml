@@ -2,11 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.Earthquakereport.EarthquakeActivity">
+    tools:context="com.example.android.cryptoconverter.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/settings_menu_item"
-        android:icon="@drawable/ic_filter"
+        android:id="@+id/btc_option"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom" />
+        android:title="@string/btc_layout"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/eth_option"
+        android:orderInCategory="1"
+        android:title="@string/eth_layout"
+        app:showAsAction="never" />
 </menu>

@@ -3,35 +3,40 @@ package com.example.android.cryptoconverter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-import static android.R.attr.data;
 import static com.example.android.cryptoconverter.R.id.main_spinner;
 import static com.example.android.cryptoconverter.R.id.price_view;
 
 public class BTCFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Double>  {
+        LoaderCallbacks<Double> {
 
-    TextView priceTextView;
-    public String selected;
-    private ArrayAdapter<String> mAdapter;
-     String USGS_REQUEST_URL = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=NGN";
     private static final int EARTHQUAKE_LOADER_ID = 1;
+    public String selected;
+    public Double earthquakes;
+    NumberFormat formattedValue = NumberFormat.getInstance(Locale.US);
+    TextView priceTextView;
+     String USGS_REQUEST_URL = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=NGN";
+    private ArrayAdapter<String> mAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.spinner_list, container, false);
+        View rootView = inflater.inflate(R.layout.spinner_list_btc, container, false);
 
         ArrayList<String>  currencyArray = new ArrayList<String>();
         currencyArray.add("NGN");
@@ -55,15 +60,18 @@ public class BTCFragment extends Fragment implements
         currencyArray.add("RUB");
         currencyArray.add("BRL");
 
-        Spinner cryptoListView = rootView.findViewById(main_spinner);
+        final Spinner cryptoListView = rootView.findViewById(main_spinner);
        priceTextView = rootView.findViewById(price_view);
-        mAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, currencyArray);
+        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, R.id.simple_spinner_item, currencyArray);
         cryptoListView.setAdapter(mAdapter);
 
-        cryptoListView.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
+        cryptoListView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                 selected = adapterView.getItemAtPosition(i).toString();
+                selected = cryptoListView.getSelectedItem().toString();
+                LoaderManager loaderManager = getLoaderManager();
+                loaderManager.restartLoader(EARTHQUAKE_LOADER_ID, null, BTCFragment.this);
+                USGS_REQUEST_URL = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=" + selected;
             }
 
             @Override
@@ -71,6 +79,7 @@ public class BTCFragment extends Fragment implements
 
             }
         });
+
 
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
@@ -82,12 +91,11 @@ public class BTCFragment extends Fragment implements
                 Intent newIntent = new Intent(getActivity(), CrytoDetails.class);
                 Bundle testing = new Bundle();
                 testing.putString("theCurrency", selected);
-                testing.putString("price", String.valueOf(priceTextView));
+                testing.putDouble("thePrice", earthquakes);
                 newIntent.putExtras(testing);
                 startActivity(newIntent);
             }
         });
-
         return rootView;
     }
 
@@ -100,13 +108,13 @@ public class BTCFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<Double> loader, Double earthquakes) {
 
-             priceTextView.setText(""+earthquakes);
+        priceTextView.setText(formattedValue.format(earthquakes));
+        this.earthquakes = earthquakes;
     }
 
     @Override
     public void onLoaderReset(Loader<Double> loader) {
 
     }
-
 }
 

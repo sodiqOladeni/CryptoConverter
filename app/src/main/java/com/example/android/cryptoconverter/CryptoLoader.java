@@ -1,11 +1,7 @@
 package com.example.android.cryptoconverter;
 
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
-
-import com.example.android.cryptoconverter.QueryUtils;
-
-import java.util.List;
+import android.support.v4.content.AsyncTaskLoader;
 
 /**
  * Loads a list of earthquakes by using an AsyncTask to perform the

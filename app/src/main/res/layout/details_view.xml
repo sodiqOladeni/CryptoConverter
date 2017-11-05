@@ -1,95 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:background="@color/background_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@android:color/black"
-                android:text="From"
-                android:textSize="27sp"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
 
             <TextView
                 android:id="@+id/initial_crypto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
                 android:text="BTC"
-                android:textSize="40sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="-"
                 android:textColor="@android:color/black"
-                android:text="To"
-                android:textSize="27sp"/>
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/clicked_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
                 android:text="NGN"
-                android:textSize="40sp"/>
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Unit Price: "
             android:textColor="@android:color/black"
-            android:text="price: "
-            android:textSize="27sp"/>
+            android:textSize="27sp"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/price_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:text="0"
             android:textColor="@android:color/black"
-            android:text="1234"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -97,15 +85,30 @@
         android:id="@+id/input_view"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:inputType="number"/>
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/editable_design"
+        android:hint="value: 0"
+        android:inputType="numberDecimal" />
 
     <TextView
         android:id="@+id/result_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:text="0"
         android:textColor="@android:color/black"
-        android:text="1234"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/open_new_button"
+        android:text="Calculate"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
